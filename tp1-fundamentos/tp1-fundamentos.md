@@ -7,3 +7,4 @@ Aunque se vienen creando para imitar a los humanos en algunos casos, lo cual no 
 Creo que hay que enfocarse en las aplicaciones tecnologicas o mecanicas que se vienen desarrollando y que ayuden al ser humano en su día a día y no para reemplazarlo. 
 Quizás sea un poco polémico, pero en algunos casos el imitar a un ser humano no está mal, ya que puede ayudar a evitar que sucedan cosas peores. 
 Por mas que sea dificil distinguir una inteligencia artificial de un humano, dentro de un futuro no tan lejano, mientras se sepa que son distintos y se entienda que es una máquina, que todo es creado artificialmente, no veo que sea un problema continuar. 
+a
