@@ -20,9 +20,23 @@ def guardar_resultados_csv(resultados, nombre_archivo='resultados.csv'):
         # Escribir los datos de cada fila
         for resultado in resultados:
             writer.writerow(resultado)
-
+def guardar_resultados_random_csv(resultados, nombre_archivo='resultados_random.csv'):
+    # Definir las cabeceras
+    cabeceras = ['size', 'dirtrate', 'performance', 'time']
+    
+    # Abrir el archivo CSV en modo escritura
+    with open(nombre_archivo, mode='w', newline='', encoding='utf-8') as archivo_csv:
+        writer = csv.DictWriter(archivo_csv, fieldnames=cabeceras)
+        
+        # Escribir la fila de cabeceras
+        writer.writeheader()
+        
+        # Escribir los datos de cada fila
+        for resultado in resultados:
+            writer.writerow(resultado)
 if __name__ == "__main__":
     results=[]
+    results_random=[]
     for s in range (1, 8):
         if s==1:
             size=2
@@ -65,6 +79,13 @@ if __name__ == "__main__":
                 'performance': env.get_performance(),
                 'time': end-start
                 })
+                results_random.append({
+                'size': size,
+                'dirtrate': dirtrate,
+                'performance': env.get_performance(),
+                'time': end-start
+                })
         #print(results)
         guardar_resultados_csv(results)
+        guardar_resultados_random_csv(results_random)
     
