@@ -1,17 +1,3 @@
-"""Implementar un agente reflexivo simple para el entorno de la aspiradora del ejercicio anterior.
-A continuacion se describe una posible interfaz a utilizar para el agente"""
-
-"""class Agent:
-def __init__(self,env): # recibe como parametro un objeto
-# de la clase Environment
-def up(self):
-def down(self):
-def left(self):
-def right(self):
-def suck(self): # Limpia
-def idle(self): # no hace nada
-def perspective(self,env): # sensa el entorno
-def think(self): # implementa las acciones a seguir por el agente"""
 
 import random
 
@@ -52,7 +38,5 @@ class Agent:
         return env.is_dirty()
     
     def think(self):
-        if self.perspective(self.env):
-            self.suck()
-        action=random.choice([self.up, self.down, self.left, self.right, self.idle])  # Ejecutar un movimiento aleatorio
+        action=random.choice([self.up, self.down, self.left, self.right, self.idle, self.suck])  # Ejecutar un movimiento aleatorio
         action()
