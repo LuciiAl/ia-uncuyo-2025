@@ -1,7 +1,7 @@
 
 import random
 
-class Agent:
+class AgentR:
     def __init__(self,env): # recibe como parametro un objeto
         self.env = env
         self.actions = ['Arriba', 'Abajo', 'Izquierda', 'Derecha', 'Limpiar', 'NoHacerNada']

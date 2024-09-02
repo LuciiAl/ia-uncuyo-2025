@@ -2,6 +2,7 @@
 
 from environment import *
 from agent import *
+from agent_random import *
 import time 
 import csv
 import copy
@@ -79,10 +80,22 @@ if __name__ == "__main__":
                 'performance': env.get_performance(),
                 'time': end-start
                 })
+            for i in range (1, 11):
+                start=time.time()
+                x= random.randint(1, size)
+                y= random.randint(1, size)
+                # Crear el entorno con tamaño 2*2, posición inicial en (x, y) y tasa de suciedad del 10%
+                envR = Environment(size , size, x-1, y-1, dirtrate)
+                # Crear el agente
+                agR = AgentR(envR)
+                for action in range (1000):
+                    agR.think()
+                #env.print_environment()
+                end = time.time()    
                 results_random.append({
                 'size': size,
                 'dirtrate': dirtrate,
-                'performance': env.get_performance(),
+                'performance': envR.get_performance(),
                 'time': end-start
                 })
         #print(results)
