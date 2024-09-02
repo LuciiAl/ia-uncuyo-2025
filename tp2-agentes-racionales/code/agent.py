@@ -26,6 +26,7 @@ class Agent:
         self.env.accept_action('Arriba')
         if self.posY != self.env.agent_pos[1]:
             self.posY = self.env.agent_pos[1]
+        
     def down(self):
         self.env.accept_action('Abajo')
         if self.posY != self.env.agent_pos[1]:
@@ -51,6 +52,7 @@ class Agent:
         return env.is_dirty()
     
     def think(self):
-        if self.perspective(self.env):
-            self.suck()
-        random.choice(self.up, self.down, self.left, self.right, self.idle)  # Ejecutar un movimiento aleatorio
+        #if self.perspective(self.env):
+        #    self.suck()
+        action=random.choice([self.up, self.down, self.left, self.right, self.idle, self.suck])  # Ejecutar un movimiento aleatorio
+        action()

@@ -62,16 +62,4 @@ class Environment:
             print()
         print(f'Performance: {self.performance}')
 
-# Ejemplo de uso
-if __name__ == "__main__":
-    # Crear el entorno con tamaño 5x5, posición inicial en (2, 2) y tasa de suciedad del 30%
-    env = Environment(5, 5, 2, 2, 0.9)
-    
-    # Simular 1000 acciones aleatorias
-    for i in range(1000):
-        action = random.choice(env.actions)
-        env.accept_action(action)
-    
-    # Imprimir el entorno final y el rendimiento
-    env.print_environment()
-    print(f'Rendimiento final: {env.get_performance()}')
+
