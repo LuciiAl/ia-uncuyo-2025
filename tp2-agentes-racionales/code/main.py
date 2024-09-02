@@ -50,7 +50,7 @@ if __name__ == "__main__":
             'size': size,
             'dirtrate': dirtrate,
             'performance': env.get_performance(),
-            'time': start-end
+            'time': end-start
             })
     #print(results)
     guardar_resultados_csv(results)
