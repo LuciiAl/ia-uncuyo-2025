@@ -23,35 +23,48 @@ def guardar_resultados_csv(resultados, nombre_archivo='resultados.csv'):
 
 if __name__ == "__main__":
     results=[]
-    for j in range(1,5):
-        if j==1:
-            dirtrate=0.1
-        elif j==2:
-            dirtrate=0.2
-        elif j==3:
-            dirtrate=0.4
-        else:
-            dirtrate=0.8
-        for i in range (1, 11):
-            #print(f'Iteración {i}')
+    for s in range (1, 8):
+        if s==1:
             size=2
-            start=time.time()
-            x= random.randint(1, size)
-            y= random.randint(1, size)
-            # Crear el entorno con tamaño 2*2, posición inicial en (x, y) y tasa de suciedad del 10%
-            env = Environment(size , size, x-1, y-1, dirtrate)
-            # Crear el agente
-            ag = Agent(env)
-            for action in range (1000):
-                ag.think()
-            #env.print_environment()
-            end = time.time()
-            results.append({
-            'size': size,
-            'dirtrate': dirtrate,
-            'performance': env.get_performance(),
-            'time': end-start
-            })
-    #print(results)
-    guardar_resultados_csv(results)
+        elif s==2:
+            size=4
+        elif s==3:
+            size=8
+        elif s==4:
+            size=16
+        elif s==5:
+            size=32
+        elif s==6:   
+            size=64    
+        else:   
+            size=128
+        for j in range(1,5):
+            if j==1:
+                dirtrate=0.1
+            elif j==2:
+                dirtrate=0.2
+            elif j==3:
+                dirtrate=0.4
+            else:
+                dirtrate=0.8
+            for i in range (1, 11):
+                start=time.time()
+                x= random.randint(1, size)
+                y= random.randint(1, size)
+                # Crear el entorno con tamaño 2*2, posición inicial en (x, y) y tasa de suciedad del 10%
+                env = Environment(size , size, x-1, y-1, dirtrate)
+                # Crear el agente
+                ag = Agent(env)
+                for action in range (1000):
+                    ag.think()
+                #env.print_environment()
+                end = time.time()
+                results.append({
+                'size': size,
+                'dirtrate': dirtrate,
+                'performance': env.get_performance(),
+                'time': end-start
+                })
+        #print(results)
+        guardar_resultados_csv(results)
     
