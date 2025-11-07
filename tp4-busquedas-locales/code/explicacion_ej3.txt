@@ -1,0 +1,27 @@
+a) Definición de los individuos de la población
+
+Cada individuo representa una configuración del tablero de N reinas. Se usa una lista de tamaño N donde el índice representa una columna y el valor en esa posición indica la fila donde se ubica la reina.
+Ejemplo: [0, 4, 7, 5, 2, 6, 1, 3] para N=8.
+
+b) Estrategia de selección
+
+Se utiliza selección por torneo: se eligen aleatoriamente k individuos de la población y se selecciona el de mayor fitness para reproducirse.
+Esta estrategia favorece a los individuos con menor número de conflictos (H bajo) y mantiene diversidad genética evitando una convergencia prematura.
+
+c) Estrategia de reemplazo
+
+Se aplica una política de elitismo combinada con reemplazo completo. Los dos mejores individuos de cada generación se copian directamente a la siguiente (sin mutación) para conservar la mejor solución encontrada. El resto de la población se reemplaza por los nuevos descendientes producidos mediante cruce y mutación.
+
+d) Operadores
+
+Cruce: se utiliza cruce de un punto, donde los hijos combinan parte del genoma de cada padre en un punto de corte aleatorio.
+
+Mutación: se aplica con una tasa del 10 %, eligiendo aleatoriamente una columna y cambiando la fila de su reina por un valor distinto. Esto permite escapar de óptimos locales y mantener variabilidad.
+
+e) Criterios de terminación
+
+El algoritmo se detiene cuando:
+
+Se encuentra una solución con H = 0, es decir, un tablero sin reinas que se ataquen.
+
+Se alcanza el número máximo de generaciones (max_generaciones), en cuyo caso se devuelve el mejor individuo hallado hasta ese momento.S
