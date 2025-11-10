@@ -1,0 +1,7 @@
+algorithm,N,success_%,time_mean,time_std,nodes_mean,nodes_std
+backtracking,4,100.0,0.000083,0.000322,26.0,0.0
+backtracking,8,100.0,0.000723,0.000613,876.0,0.0
+backtracking,10,100.0,0.000843,0.000745,975.0,0.0
+forward,4,100.0,0.000071,0.000269,8.0,0.0
+forward,8,100.0,0.000612,0.000633,88.0,0.0
+forward,10,100.0,0.000475,0.000600,83.0,0.0
