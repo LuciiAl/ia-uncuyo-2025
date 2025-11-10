@@ -66,7 +66,7 @@ Los gráficos siguientes muestran las comparaciones obtenidas.
 ###  Eficiencia promedio según nivel de suciedad
 *(Relación entre celdas limpiadas y acciones realizadas)*
 
-![Relación entre celdas limpiadas y acciones realizadas](./images/eficiendia_vs_suciedad.png)
+![Relación entre celdas limpiadas y acciones realizadas](./images/eficiencia_vs_suciedad.png)
 
 ###  Comparaciones detalladas (gráficos individuales)
 
