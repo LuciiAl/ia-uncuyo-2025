@@ -1,115 +1,51 @@
-# TP7A – Introducción al Aprendizaje Estadístico (Machine Learning)
+# TP 7A - Introducción al Aprendizaje Estadístico (Statistical Learning)
 
-**Fuente:** James, G., Witten, D., Hastie, T., & Tibshirani, R. (2021).  
-*An Introduction to Statistical Learning: with Applications in R* (2nd ed., corrected printing 2023). Springer.  
-Lectura: Capítulo 2 (hasta la página 42).
-
----
-
-## 1. Métodos flexibles vs inflexibles
-
-### a) n extremadamente grande, p pequeño  
-**Mejor flexible.** Con muchos datos y pocos predictores, el método flexible puede aprender relaciones complejas sin sobreajustar, ya que el gran tamaño de muestra reduce la varianza. Un método inflexible sufriría de alto sesgo.
-
-### b) p extremadamente grande, n pequeño  
-**Mejor inflexible.** Con muchos predictores y pocas observaciones, un método flexible tiene alta varianza y riesgo de sobreajuste. Un método menos flexible reduce la varianza y generaliza mejor.
-
-### c) Relación altamente no lineal  
-**Mejor flexible.** Los métodos flexibles capturan relaciones no lineales y complejas entre predictores y variable objetivo, mientras que los rígidos fallan por alto sesgo.
-
-### d) Varianza del error muy alta (σ² grande)  
-**Mejor inflexible.** Cuando el ruido es alto, los métodos flexibles tienden a seguirlo, aumentando la varianza. Los métodos más simples son más estables y menos sensibles al ruido.
+**Universidad Nacional de Cuyo**  
+**Facultad de Ingeniería – Departamento de Informática**
 
 ---
 
-## 2. Tipos de problema, objetivo e identificación de n y p
+## 1. En cada uno de los siguientes ejercicios, indique si en general se espera que un método de aprendizaje de máquinas flexible se comporte mejor o peor que uno inflexible. Justifique su respuesta.
 
-### a) Salario de CEO según ganancias, empleados e industria  
-- **Tipo:** Regresión (variable dependiente continua).  
-- **Objetivo:** Inferencia (entender qué factores afectan el salario).  
-- **n:** 500 (empresas).  
-- **p:** 3 (ganancias, empleados, industria).
-
-### b) Éxito o fracaso de producto nuevo  
-- **Tipo:** Clasificación (éxito/fracaso).  
-- **Objetivo:** Predicción (decidir si lanzar el producto).  
-- **n:** 20 (productos).  
-- **p:** 13 (precio, marketing, competencia, 10 variables adicionales).
-
-### c) Predicción del % cambio USD/EUR según mercados  
-- **Tipo:** Regresión (variable continua).  
-- **Objetivo:** Predicción.  
-- **n:** ≈52 (semanas de 2021).  
-- **p:** 3 (mercados de EE. UU., Reino Unido y Alemania).
+a) El tamaño de la muestra **n** es extremadamente grande, y el número de predictores **p** es pequeño.  
+b) El número de predictores **p** es extremadamente grande, y el número de observaciones **n** es pequeño.  
+c) La relación entre los predictores y la variable dependiente es altamente no lineal.  
+d) La varianza de los términos de error, \( \sigma^2 = \mathrm{Var}(\epsilon) \), es extremadamente alta.
 
 ---
 
-## 3. Ventajas y desventajas de un enfoque muy flexible
+## 2. Explique si cada escenario representa un problema de clasificación o de regresión, e indique si el interés principal es inferir o predecir. Especifique **n** (cantidad de observaciones) y **p** (cantidad de predictores) en cada caso.
 
-**Ventajas:**
-- Bajo sesgo.
-- Puede modelar relaciones complejas y no lineales.
-- Mejora el rendimiento predictivo si hay suficiente información (n grande y ruido bajo).
+**a)** Se recopila un conjunto de datos sobre las 500 empresas más importantes de Estados Unidos. Para cada una de las empresas se registran las ganancias, el número de empleados, la industria y el salario del director ejecutivo. Se tiene interés en comprender qué factores afectan el salario de los directores ejecutivos.
 
-**Desventajas:**
-- Alta varianza (sobreajuste con n pequeño o p grande).
-- Menor interpretabilidad.
-- Mayor costo computacional.
+**b)** Se está considerando lanzar un nuevo producto y se desea saber si será un éxito o un fracaso. Se recolectan datos de 20 productos similares que fueron lanzados previamente. Para cada producto se ha registrado si fue un éxito o un fracaso, el precio cobrado por el producto, el presupuesto de marketing, el precio de la competencia, y otras diez variables.
 
-**Preferir flexible cuando:** la relación es compleja/no lineal, hay muchos datos, el ruido es bajo y el interés es predecir.  
-**Preferir inflexible cuando:** el tamaño de muestra es pequeño, hay mucho ruido o se busca interpretar.
+**c)** Se tiene interés en predecir el % de cambio en el tipo de cambio USD/Euro en relación a los cambios semanales en los mercados de valores mundiales. Para eso se recolectan datos semanalmente durante todo el 2021. Para cada semana se registran el % de cambio de USD/Euro, el % de cambio en el mercado estadounidense, el % de cambio en el mercado británico, y el % de cambio en el mercado alemán.
 
 ---
 
-## 4. Enfoques paramétricos vs no paramétricos
-
-| Aspecto | Paramétrico | No paramétrico |
-|----------|--------------|----------------|
-| **Supuesto** | Fija una forma funcional (ej. lineal). | No asume forma funcional. |
-| **Ejemplo** | Regresión lineal, logística. | k-NN, árboles, kernels, splines. |
-| **Ventajas** | Simplicidad, interpretabilidad, bajo costo computacional. | Alta flexibilidad, puede modelar funciones complejas. |
-| **Desventajas** | Alto sesgo si la forma está mal elegida. | Alta varianza, requiere n grande, menos interpretable. |
-| **Preferir cuando...** | Se desea inferencia o interpretabilidad. | Se desea predicción y relaciones no lineales. |
+## 3. ¿Cuáles son las ventajas y desventajas de un enfoque muy flexible (versus uno menos flexible) para la regresión o clasificación? ¿Bajo qué circunstancias podría preferirse un enfoque más flexible a uno menos flexible? ¿Cuándo podría preferirse un enfoque menos flexible?
 
 ---
 
-## 5. K-Nearest Neighbors (k-NN)
-
-### Dataset
-| Obs | X1 | X2 | X3 | Y |
-|-----|----|----|----|---|
-| 1 | 0 | 3 | 0 | Rojo |
-| 2 | 2 | 0 | 0 | Rojo |
-| 3 | 0 | 1 | 3 | Rojo |
-| 4 | 0 | 1 | 2 | Verde |
-| 5 | -1 | 0 | 1 | Verde |
-| 6 | 1 | 1 | 1 | Rojo |
-
-Punto de prueba: **X = (0, 0, 0)**
-
-### a) Distancias euclidianas
-
-| Obs | X | Y | Distancia |
-|-----|---|---|------------|
-| 1 | (0,3,0) | Rojo | 3.000 |
-| 2 | (2,0,0) | Rojo | 2.000 |
-| 3 | (0,1,3) | Rojo | 3.162 |
-| 4 | (0,1,2) | Verde | 2.236 |
-| 5 | (-1,0,1) | Verde | 1.414 |
-| 6 | (1,1,1) | Rojo | 1.732 |
-
-### b) Predicción con K = 1  
-Vecino más cercano: obs. 5 → **Verde.**
-
-### c) Predicción con K = 3  
-Tres más cercanos: obs. 5 (Verde), obs. 6 (Rojo), obs. 2 (Rojo).  
-Mayoría: **Rojo (2 de 3).**
-
-### d) Valor óptimo de K ante límite de Bayes no lineal  
-Si el límite de decisión es altamente no lineal, el mejor **K** es **pequeño**, ya que produce una frontera más flexible y puede seguir curvas complejas. Un **K grande** genera un modelo más rígido (alta suavización, alto sesgo).
+## 4. Describa las diferencias entre un enfoque paramétrico y uno no paramétrico. ¿Cuáles son las ventajas y desventajas de un enfoque paramétrico para regresión o clasificación, a diferencia de un enfoque no paramétrico?
 
 ---
 
-**Autor:** _[Tu nombre]_  
-**Materia:** Inteligencia Artificial / Machine Learning  
-**Año:** 2025 – UNCUYO
+## 5. Conjunto de entrenamiento (6 observaciones, 3 predictores, Y cualitativa)
+
+| Obs. | X1  | X2 | X3 | Y     |
+|:----:|:---:|:--:|:--:|:-----:|
+| 1    | 0   | 3  | 0  | Rojo  |
+| 2    | 2   | 0  | 0  | Rojo  |
+| 3    | 0   | 1  | 3  | Rojo  |
+| 4    | 0   | 1  | 2  | Verde |
+| 5    | -1  | 0  | 1  | Verde |
+| 6    | 1   | 1  | 1  | Rojo  |
+
+Se desea predecir **Y** para el punto de prueba **X1 = X2 = X3 = 0** usando **K vecinos más cercanos (K-NN)**.
+
+**a)** Calcule la distancia Euclidiana entre cada observación y el punto de prueba \( X = (0, 0, 0) \).  
+**b)** ¿Cuál es la predicción con \( K = 1 \)? Justifique.  
+**c)** ¿Cuál es la predicción con \( K = 3 \)? Justifique.  
+**d)** Si el límite de decisión de Bayes en este problema es altamente no lineal, ¿se espera que el mejor valor para \( K \) sea grande o pequeño? ¿Por qué?
