@@ -1,18 +1,41 @@
 # TP 7A - Introducción al Aprendizaje Estadístico (Statistical Learning)
 
 **Universidad Nacional de Cuyo**  
-**Facultad de Ingeniería – Departamento de Informática**
-
----
+**Facultad de Ingeniería 
 
 ## 1. En cada uno de los siguientes ejercicios, indique si en general se espera que un método de aprendizaje de máquinas flexible se comporte mejor o peor que uno inflexible. Justifique su respuesta.
 
 a) El tamaño de la muestra **n** es extremadamente grande, y el número de predictores **p** es pequeño.  
-b) El número de predictores **p** es extremadamente grande, y el número de observaciones **n** es pequeño.  
+**→ Mejor desempeño esperado: método flexible.**
+
+Cuando se dispone de **muchas observaciones** y pocos predictores, el modelo flexible puede capturar patrones complejos sin sobreajustar, ya que la gran cantidad de datos reduce la **varianza**.  
+En estos casos, el sesgo bajo de los métodos flexibles se aprovecha y la varianza no crece significativamente.
+
+En ISL (cap. 2), los autores explican que “con suficiente cantidad de datos, un método más flexible puede superar al lineal porque el costo en varianza se ve compensado por la reducción en sesgo”.
+b) El número de predictores **p** es extremadamente grande, y el número de observaciones **n** es pequeño.
+ **→ Mejor desempeño esperado: método inflexible.**
+
+Cuando *p ≫ n*, los métodos flexibles tienden a **sobreajustar** fácilmente, ya que pueden encontrar patrones espurios en los pocos datos disponibles.  
+Un modelo inflexible (de baja complejidad) impone mayor estructura, controlando la varianza y evitando el sobreajuste.
+
+En ISL se señala que los métodos flexibles “requieren muchos más datos para estimar una superficie de respuesta precisa en espacios de alta dimensión”.
+
 c) La relación entre los predictores y la variable dependiente es altamente no lineal.  
+**→ Mejor desempeño esperado: método flexible.**
+
+Los métodos flexibles pueden aproximar relaciones **no lineales** o interacciones complejas entre variables, mientras que los inflexibles (como un modelo lineal) suponen una forma rígida y pueden tener alto **sesgo**.
+
+ISL enfatiza que los métodos flexibles, al permitir relaciones no lineales, reducen el sesgo cuando la función verdadera \( f(X) \) no es lineal.
+
 d) La varianza de los términos de error, \( \sigma^2 = \mathrm{Var}(\epsilon) \), es extremadamente alta.
 
----
+**→ Mejor desempeño esperado: método inflexible.**
+
+Cuando hay mucho **ruido** en los datos, un método flexible puede intentar ajustar ese ruido, aumentando su **varianza** y empeorando su capacidad predictiva.  
+Un modelo inflexible suaviza más la señal y resulta más **estable** frente al ruido.
+
+En ISL se ilustra este punto con el gráfico de “Trade-off Bias–Variance”, donde los métodos flexibles son más sensibles a la varianza del error.
+
 
 ## 2. Explique si cada escenario representa un problema de clasificación o de regresión, e indique si el interés principal es inferir o predecir. Especifique **n** (cantidad de observaciones) y **p** (cantidad de predictores) en cada caso.
 
