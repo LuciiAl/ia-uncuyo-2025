@@ -14,14 +14,14 @@ IMG_DIR = "images"
 os.makedirs(IMG_DIR, exist_ok=True)
 
 # ============================================================
-# CARGAR DATOS
+# CARGA DE DATOS
 # ============================================================
-print("📥 Cargando resultados de TP4 y TP5...")
+print("Cargando resultados de TP4 y TP5...")
 
 tp4 = pd.read_csv(TP4_PATH)
 tp5 = pd.read_csv(TP5_PATH)
 
-# Estandarizar nombres de columnas
+# Normalizar columnas
 tp4.rename(columns={
     "algorithm_name": "algorithm",
     "size": "N",
@@ -30,103 +30,73 @@ tp4.rename(columns={
     "H": "H"
 }, inplace=True)
 
-tp5["H"] = 0  # No hay función H, pero agregamos columna para compatibilidad
+tp5["H"] = 0
+tp5["family"] = "CSP"
+tp4["family"] = "Local Search"
 
-# Unificar datasets
 df = pd.concat([tp4, tp5], ignore_index=True)
-df["family"] = df["algorithm"].apply(lambda a: "Local Search" if a in ["HC", "SA", "GA", "random"] else "CSP")
 
-# ============================================================
-# LIMPIEZA Y FORMATO ROBUSTO
-# ============================================================
-for col in ["found", "time", "nodes"]:
-    if col in df.columns:
-        df[col] = pd.to_numeric(df[col], errors="coerce")  # convierte a numérico, NaN si falla
-
-# Reemplazar NaN o infinitos por 0 para evitar fallos
-df = df.replace([float("inf"), float("-inf")], 0)
-df = df.fillna(0)
-
-# Convertir solo después de limpiar
-df["found"] = df["found"].astype(int)
-
+# Convertir tipos y limpiar
+for col in ["time", "nodes"]:
+    df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
 # ============================================================
 # MÉTRICAS AGREGADAS
 # ============================================================
-summary = df.groupby(["algorithm", "N"]).agg(
-    success_rate=("found", lambda x: 100 * x.mean()),
+summary = df.groupby(["family", "algorithm", "N"]).agg(
     time_mean=("time", "mean"),
     time_std=("time", "std"),
     nodes_mean=("nodes", "mean"),
     nodes_std=("nodes", "std")
 ).reset_index()
 
-print("\n=== RESUMEN GENERAL ===")
+print("\n=== RESUMEN COMPARATIVO ===")
 print(summary.round(3))
 
 # ============================================================
-# GRÁFICOS
+# GRÁFICOS COMPARATIVOS
 # ============================================================
-
 sns.set(style="whitegrid")
 
-# --- 1️⃣ Boxplot de tiempos ---
+# 1️⃣ Boxplot de tiempo
 plt.figure(figsize=(10, 6))
-sns.boxplot(data=df, x="algorithm", y="time", hue="N")
-plt.title("Distribución de tiempos por algoritmo y tamaño N")
-plt.ylabel("Tiempo (s)")
+sns.boxplot(data=df, x="algorithm", y="time", hue="family")
+plt.title("Comparativo de tiempo por algoritmo (TP4 vs TP5)")
 plt.xlabel("Algoritmo")
-plt.legend(title="Tamaño N")
+plt.ylabel("Tiempo (s)")
+plt.legend(title="Familia")
 plt.tight_layout()
-plt.savefig(os.path.join(IMG_DIR, "compare_time_boxplot.png"))
+plt.savefig(os.path.join(IMG_DIR, "compare_tp4_tp5_time.png"))
 plt.close()
-print("📊 Guardado: compare_time_boxplot.png")
 
-# --- 2️⃣ Boxplot de nodos ---
+# 2️⃣ Boxplot de nodos
 plt.figure(figsize=(10, 6))
-sns.boxplot(data=df, x="algorithm", y="nodes", hue="N")
-plt.title("Distribución de nodos explorados por algoritmo y tamaño N")
+sns.boxplot(data=df, x="algorithm", y="nodes", hue="family")
+plt.title("Comparativo de nodos explorados por algoritmo (TP4 vs TP5)")
+plt.xlabel("Algoritmo")
 plt.ylabel("Nodos explorados")
+plt.legend(title="Familia")
+plt.tight_layout()
+plt.savefig(os.path.join(IMG_DIR, "compare_tp4_tp5_nodes.png"))
+plt.close()
+
+# 3️⃣ Promedios agrupados
+plt.figure(figsize=(9, 6))
+sns.barplot(data=summary, x="algorithm", y="time_mean", hue="family")
+plt.title("Tiempo medio de ejecución (TP4 vs TP5)")
+plt.ylabel("Tiempo promedio (s)")
 plt.xlabel("Algoritmo")
-plt.legend(title="Tamaño N")
 plt.tight_layout()
-plt.savefig(os.path.join(IMG_DIR, "compare_nodes_boxplot.png"))
+plt.savefig(os.path.join(IMG_DIR, "compare_tp4_tp5_time_mean.png"))
 plt.close()
-print("📊 Guardado: compare_nodes_boxplot.png")
 
-# --- 3️⃣ Porcentaje de éxito ---
 plt.figure(figsize=(9, 6))
-sns.barplot(data=summary, x="algorithm", y="success_rate", hue="N")
-plt.title("Porcentaje de ejecuciones exitosas (solución encontrada)")
-plt.ylabel("Éxito (%)")
-plt.ylim(0, 110)
-plt.legend(title="Tamaño N")
+sns.barplot(data=summary, x="algorithm", y="nodes_mean", hue="family")
+plt.title("Nodos promedio explorados (TP4 vs TP5)")
+plt.ylabel("Nodos promedio")
+plt.xlabel("Algoritmo")
 plt.tight_layout()
-plt.savefig(os.path.join(IMG_DIR, "compare_success_rate.png"))
+plt.savefig(os.path.join(IMG_DIR, "compare_tp4_tp5_nodes_mean.png"))
 plt.close()
-print("📊 Guardado: compare_success_rate.png")
 
-# --- 4️⃣ Rendimiento combinado ---
-plt.figure(figsize=(9, 6))
-sns.scatterplot(data=summary, x="time_mean", y="success_rate", hue="algorithm", style="N", s=150)
-plt.title("Tiempo promedio vs Porcentaje de éxito")
-plt.xlabel("Tiempo medio (s)")
-plt.ylabel("Éxito (%)")
-plt.tight_layout()
-plt.savefig(os.path.join(IMG_DIR, "compare_time_vs_success.png"))
-plt.close()
-print("📈 Guardado: compare_time_vs_success.png")
-
-# --- 5️⃣ Comparación entre familias ---
-plt.figure(figsize=(9, 6))
-sns.boxplot(data=df, x="family", y="time", hue="N")
-plt.title("Comparación de familias de algoritmos: Local Search vs CSP")
-plt.ylabel("Tiempo (s)")
-plt.xlabel("Familia")
-plt.tight_layout()
-plt.savefig(os.path.join(IMG_DIR, "compare_families.png"))
-plt.close()
-print("📈 Guardado: compare_families.png")
-
-print("\n✅ Todos los gráficos se guardaron en la carpeta:", IMG_DIR)
+print("\n✅ Gráficos comparativos guardados en:", IMG_DIR)
