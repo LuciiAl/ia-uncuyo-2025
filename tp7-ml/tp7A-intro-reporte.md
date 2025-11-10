@@ -1,7 +1,7 @@
 # TP 7A - Introducción al Aprendizaje Estadístico (Statistical Learning)
 
 **Universidad Nacional de Cuyo**  
-**Facultad de Ingeniería 
+Facultad de Ingeniería 
 
 ## 1. En cada uno de los siguientes ejercicios, indique si en general se espera que un método de aprendizaje de máquinas flexible se comporte mejor o peor que uno inflexible. Justifique su respuesta.
 
@@ -27,7 +27,7 @@ Los métodos flexibles pueden aproximar relaciones **no lineales** o interaccion
 
 ISL enfatiza que los métodos flexibles, al permitir relaciones no lineales, reducen el sesgo cuando la función verdadera \( f(X) \) no es lineal.
 
-d) La varianza de los términos de error, \( \sigma^2 = \mathrm{Var}(\epsilon) \), es extremadamente alta.
+d) La varianza de los términos de error, σ² = Var(ε), es extremadamente alta.
 
 **→ Mejor desempeño esperado: método inflexible.**
 
@@ -102,7 +102,7 @@ Desventajas de un enfoque muy flexible
 - **Menor interpretabilidad:** es más difícil explicar cómo los predictores afectan la variable objetivo.  
 - **Mayor costo computacional:** suelen requerir más procesamiento y ajuste de hiperparámetros.
 
-*ISL* resalta que, cuando \( \sigma^2 \) (ruido) es alto o \( n \) es pequeño, los métodos flexibles tienden a sobreajustar, mientras que los rígidos se comportan mejor.
+ISL resalta que, cuando σ² (ruido) es alto o n es pequeño, los métodos flexibles tienden a sobreajustar, mientras que los rígidos se comportan mejor.
 
 Cuándo preferir cada tipo de enfoque
 
@@ -110,7 +110,7 @@ Cuándo preferir cada tipo de enfoque
 - La relación entre los predictores y la respuesta es **no lineal o compleja**.  
 - El tamaño de muestra \( n \) es **grande**, lo que permite controlar la varianza.  
 - El **objetivo principal es la predicción** más que la inferencia.  
-- El ruido en los datos es bajo (\( \sigma^2 \) pequeño).
+- El ruido en los datos es bajo (σ² pequeño).
 
 ### Preferir un **enfoque menos flexible** cuando:
 - Se desea **interpretar** las relaciones entre variables (no solo predecir).  
@@ -120,13 +120,11 @@ Cuándo preferir cada tipo de enfoque
 
 ## 4. Describa las diferencias entre un enfoque paramétrico y uno no paramétrico. ¿Cuáles son las ventajas y desventajas de un enfoque paramétrico para regresión o clasificación, a diferencia de un enfoque no paramétrico?
 
-Un **modelo paramétrico** asume que la relación entre la variable de respuesta \( Y \) y los predictores \( X_1, X_2, \dots, X_p \) puede representarse mediante una función con un número finito de parámetros, por ejemplo:
+Un modelo paramétrico asume que la relación entre la variable de respuesta Y y los predictores X₁, X₂, …, Xₚ puede representarse mediante una función con un número finito de parámetros, por ejemplo:
 
-\[
-Y \approx f(X) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p
-\]
+Y ≈ f(X) = β₀ + β₁X₁ + … + βₚXₚ
 
-El aprendizaje consiste en **estimar los parámetros** \( \beta_0, \beta_1, \dots, \beta_p \) a partir de los datos.
+El aprendizaje consiste en estimar los parámetros β₀, β₁, …, βₚ a partir de los datos.
 
 ### Ventajas de los métodos paramétricos
 
@@ -149,9 +147,7 @@ Ejemplos típicos: regresión lineal, regresión logística, análisis discrimin
 Los **métodos no paramétricos** no imponen una forma funcional específica.  
 En lugar de asumir una estructura fija para \( f(X) \), permiten que los datos determinen la forma de la función de manera más libre.
 
-\[
-Y \approx f(X), \quad \text{donde } f \text{ es aprendida directamente de los datos.}
-\]
+Y ≈ f(X), donde f es aprendida directamente de los datos.
 
 ### Ventajas de los métodos no paramétricos
 
@@ -190,12 +186,10 @@ En términos del equilibrio **sesgo-varianza**, los modelos paramétricos suelen
 
 Se desea predecir **Y** para el punto de prueba **X1 = X2 = X3 = 0** usando **K vecinos más cercanos (K-NN)**.
 
-**a)** Calcule la distancia Euclidiana entre cada observación y el punto de prueba \( X = (0, 0, 0) \).  
-La distancia euclidiana entre dos puntos \( X_i = (x_{i1}, x_{i2}, x_{i3}) \) y \( X = (0, 0, 0) \) se calcula como:
+**a)** Calcule la distancia Euclidiana entre cada observación y el punto de prueba X = (0, 0, 0).
+La distancia euclidiana entre dos puntos Xᵢ = (xᵢ₁, xᵢ₂, xᵢ₃) y X = (0, 0, 0) se calcula como:
 
-\[
-d(X_i, X) = \sqrt{(x_{i1})^2 + (x_{i2})^2 + (x_{i3})^2}
-\]
+d(Xᵢ, X) = √((xᵢ₁)² + (xᵢ₂)² + (xᵢ₃)²)
 
 Aplicando esta fórmula:
 
@@ -215,9 +209,7 @@ El algoritmo **K-NN con \( K = 1 \)** clasifica el punto de prueba según la cla
 - Clase del vecino: **Verde**.
 
 **Predicción:**  
-\[
-\hat{Y}_{K=1} = \text{Verde}
-\]
+Ŷ(K=1) = Verde
 
 Con \(K=3\), K-NN estima la clase mayoritaria en el vecindario inmediato del punto de prueba. Este vecindario es lo bastante pequeño como para incluir a los tres puntos citados; la mayoría corresponde a Rojo, por lo que esa es la asignación coherente con la regla de decisión de K-NN.
 
@@ -237,9 +229,7 @@ Votación por mayoría:
 - **Verde:** 1 voto  
 
 **Predicción:**  
-\[
-\hat{Y}_{K=3} = \text{Rojo}
-\]
+Ŷ(K=3) = Rojo
 
 Con \(K=3\), K-NN estima la clase mayoritaria en el vecindario inmediato del punto de prueba. Este vecindario es lo bastante pequeño como para incluir a los tres puntos citados; la mayoría corresponde a Rojo, por lo que esa es la asignación coherente con la regla de decisión de K-NN.
 
