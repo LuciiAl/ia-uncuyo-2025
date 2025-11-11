@@ -6,7 +6,6 @@ En este trabajo se evaluaron los algoritmos **Backtracking clásico** y **Forwar
 
 Cada algoritmo fue ejecutado **30 veces** para los tamaños **N = 4, 8 y 10**, registrando el tiempo, los nodos explorados y la tasa de éxito (soluciones válidas encontradas).
 
----
 
 ### Tabla resumen de resultados
 | algorithm | N | success_% | time_mean | time_std | nodes_mean | nodes_std |
@@ -19,20 +18,18 @@ Cada algoritmo fue ejecutado **30 veces** para los tamaños **N = 4, 8 y 10**, r
 | forward | 10 | 100.0 | 0.000475 | 0.0006 | 83.0 | 0.0 |
 
 
----
 
 ### Gráficos de desempeño
 
 ## Gráficos de TP5 – CSP
-### tp5_csp_nodes_boxplot.png
+
 ![tp5_csp_nodes_boxplot.png](images/tp5_csp_nodes_boxplot.png)
-### tp5_csp_success_rate.png
+
 ![tp5_csp_success_rate.png](images/tp5_csp_success_rate.png)
-### tp5_csp_time_boxplot.png
+
 ![tp5_csp_time_boxplot.png](images/tp5_csp_time_boxplot.png)
 
 
----
 
 ### Conclusiones del TP5
 
@@ -41,9 +38,6 @@ Cada algoritmo fue ejecutado **30 veces** para los tamaños **N = 4, 8 y 10**, r
 - En términos de tiempo, **Forward Checking** mantiene un comportamiento más estable y eficiente.
 - La poda anticipada de dominios en cada asignación es clave para reducir la explosión combinatoria.
 
-> **Conclusión:** Forward Checking es el método más eficiente y escalable para resolver el CSP de N-Reinas, sin comprometer exactitud.
-
----
 
 ## 2. Comparación General – Búsquedas Locales (TP4) vs CSP (TP5)
 
@@ -54,7 +48,6 @@ Se busca analizar diferencias en:
 - **Nodos explorados**
 - **Tasa de éxito**
 
----
 
 ### Muestra parcial de datos (TP4)
 | algorithm_name | env_n | size | best_solution | H | states | time |
@@ -71,31 +64,28 @@ Se busca analizar diferencias en:
 | GA | 1 | 4 | [2, 0, 3, 1] | 0 | 0 | 0.001068 |
 
 
----
 
 ### Gráficos comparativos
 
 ## Comparativa TP4 vs TP5
-### compare_tp4_tp5_nodes.png
+
 ![compare_tp4_tp5_nodes.png](images/compare_tp4_tp5_nodes.png)
-### compare_tp4_tp5_nodes_mean.png
+
 ![compare_tp4_tp5_nodes_mean.png](images/compare_tp4_tp5_nodes_mean.png)
-### compare_tp4_tp5_time.png
+
 ![compare_tp4_tp5_time.png](images/compare_tp4_tp5_time.png)
-### compare_tp4_tp5_time_mean.png
+
 ![compare_tp4_tp5_time_mean.png](images/compare_tp4_tp5_time_mean.png)
 
 
----
 
 ### Análisis comparativo
 
 - Los métodos **CSP (Backtracking, Forward Checking)** garantizan **soluciones exactas**, pero con tiempos de ejecución más altos en N grandes.
-- Los algoritmos de **búsqueda local (SA, GA, HCR)** ofrecen soluciones rápidas y aproximadas, alcanzando buenos resultados en tiempo, aunque sin garantía de optimalidad.
+- Los algoritmos de **búsqueda local (SA, HCR)** ofrecen soluciones rápidas y aproximadas, alcanzando buenos resultados en tiempo, aunque sin garantía de optimalidad.
 - **Simulated Annealing (SA)** se posiciona como el mejor entre los métodos locales: rápido, robusto y consistente.
 - **Forward Checking (CSP)** domina en exactitud y control de nodos, aunque a un costo computacional mayor en escalas grandes.
 
----
 
 ### Conclusión global
 
@@ -107,18 +97,9 @@ Se busca analizar diferencias en:
 | Tiempo | Bajo–medio | Medio–alto |
 | Mejor método | **Simulated Annealing (SA)** | **Forward Checking (FC)** |
 
----
 
 ## 3. Conclusión Final Integrada
 
 - **Forward Checking (CSP)** sobresale por su precisión y control, siendo ideal para validación o demostración de soluciones exactas.
 - **Simulated Annealing (Local Search)** se destaca por su velocidad y adaptabilidad, siendo más adecuado para problemas grandes o con restricciones suaves.
 - Ambos enfoques son complementarios: uno garantiza optimalidad, el otro eficiencia práctica.
-
-> **Conclusión final:**  
-> Los resultados muestran la sinergia entre los paradigmas **CSP (exactos)** y **Búsquedas Locales (aproximadas)**.  
-> En conjunto, permiten abordar el problema de las N-Reinas desde dos perspectivas complementarias: **optimización exacta y heurística**.
-
----
-
-*Generado automáticamente a partir de los CSV `tp4-Nreinas.csv` y `tp5-csp-summary.csv`, con gráficos ubicados en la carpeta `images/`.*
