@@ -11,6 +11,9 @@
 → **Basado en modelo y objetivos.**
 Debe construir un modelo del entorno dinámico (posición de enemigos, cobertura, munición, etc.) y actuar para cumplir objetivos (eliminar enemigos, plantar/desactivar bomba, sobrevivir).
 
+**Propiedades del entorno:**  
+→ Totalmente observable, dinámico, estocástico, secuencial, continuo, multiagente.  
+
 ### **b) Explorar los océanos**
 
 **PEAS:**
@@ -23,6 +26,10 @@ Debe construir un modelo del entorno dinámico (posición de enemigos, cobertura
 **Tipo de agente:**
 → **Basado en modelo y en objetivos.**
 Debe mantener un modelo interno del entorno (mapa submarino, obstáculos, corrientes) y orientarse hacia objetivos (explorar zonas nuevas, recolectar muestras, evitar colisiones).
+
+**Propiedades del entorno:**  
+→ Parcialmente observable, dinámico, estocástico, secuencial, continuo, mono o multiagente.  
+
 
 ### **c) Comprar y vender tokens crypto**
 
@@ -37,6 +44,10 @@ Debe mantener un modelo interno del entorno (mapa submarino, obstáculos, corrie
 → **Basado en utilidad o que aprende.**
 Busca maximizar utilidad (ganancia esperada) y puede aprender patrones del mercado mediante machine learning para predecir movimientos.
 
+**Propiedades del entorno:**  
+→ Parcialmente observable, dinámico, estocástico, secuencial, discreto, multiagente.  
+
+
 ### **d) Practicar tenis contra una pared**
 
 **PEAS:**
@@ -49,6 +60,9 @@ Busca maximizar utilidad (ganancia esperada) y puede aprender patrones del merca
 **Tipo de agente:**
 → **Reflejo basado en modelo (si entrena conscientemente)** o **reflejo simple (si solo reacciona).**
 El jugador puede ajustar su respuesta según el rebote (modelo físico del entorno), aprendiendo a anticipar trayectorias.
+
+**Propiedades del entorno:**  
+→ Totalmente observable, determinístico, secuencial, continuo, monoagente, estático.  
 
 ### **e) Realizar un salto de altura**
 
@@ -63,6 +77,9 @@ El jugador puede ajustar su respuesta según el rebote (modelo físico del entor
 → **Basado en objetivos o que aprende.**
 Tiene el objetivo de superar una altura y puede ajustar su técnica mediante aprendizaje y retroalimentación (ensayo y error).
 
+**Propiedades del entorno:**  
+→ Totalmente observable, determinístico, episódico, continuo, monoagente, estático.  
+
 ### **f) Pujar por un artículo en una subasta**
 
 **PEAS:**
@@ -76,3 +93,5 @@ Tiene el objetivo de superar una altura y puede ajustar su técnica mediante apr
 → **Basado en utilidad.**
 El agente evalúa la utilidad esperada (valor del artículo vs costo) y decide si continuar o retirarse; puede incluir aprendizaje si analiza estrategias pasadas.
 
+**Propiedades del entorno:**  
+→ Parcialmente observable, dinámico, estocástico, secuencial, discreto, multiagente.  
