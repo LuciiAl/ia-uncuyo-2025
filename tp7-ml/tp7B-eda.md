@@ -5,7 +5,7 @@
 ![Distribución de inclinación peligrosa](code/eda-clasif-cv/images/dist_inclinacion_peligrosa.png)
 
 
-**Interpretación:** La mayoría de los árboles **no presentan inclinación peligrosa**, lo que indica un **conjunto de datos desbalanceado**. Este desbalance debe considerarse en las etapas de modelado.
+**Interpretación:** La mayoría de los árboles **no presentan inclinación peligrosa**, lo que indica un **conjunto de datos desbalanceado**.
 
 
 ## Secciones más peligrosas
@@ -13,7 +13,7 @@
 ![Peligrosidad por sección](code/eda-clasif-cv/images/peligrosidad_por_seccion.png)
 
 
-**Interpretación:** Las secciones con mayor proporción de árboles con inclinación peligrosa son las siguientes: . Estas zonas pueden considerarse **más riesgosas** y deberían priorizarse en inspecciones.
+**Interpretación:** Las secciones con mayor proporción de árboles con inclinación peligrosa son las siguientes: . Estas zonas pueden considerarse **más riesgosas**.
 
 
 ## Especies más peligrosas
@@ -21,7 +21,7 @@
 ![Peligrosidad por especie](code/eda-clasif-cv/images/peligrosidad_por_especie.png)
 
 
-**Interpretación:** Las especies con mayor proporción de árboles con inclinación peligrosa pueden considerarse más vulnerables estructuralmente o menos adaptadas a las condiciones del entorno urbano. Estas especies requieren mayor seguimiento y eventualmente podas o reemplazos preventivos.
+**Interpretación:** Las especies con mayor proporción de árboles con inclinación peligrosa pueden considerarse más vulnerables estructuralmente o menos adaptadas a las condiciones del entorno urbano. 
 
 ## Análisis de circ_tronco_cm y creación de variable categórica
 
