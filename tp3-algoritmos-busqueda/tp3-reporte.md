@@ -12,6 +12,9 @@ Los algoritmos evaluados fueron:
 - **DLS (Depth-Limited Search)**
 - **UCS (Uniform-Cost Search)**
 - **A\*** (A-star)
+  
+En el algoritmo A* se utilizó la distancia Manhattan como heurística, ya que el agente solo puede moverse en las cuatro direcciones básicas.
+La heurística Manhattan calcula la suma de los desplazamientos horizontales y verticales necesarios para alcanzar el objetivo, proporcionando una estimación directa del costo mínimo restante.
 
 ## Descripción del entorno
 
