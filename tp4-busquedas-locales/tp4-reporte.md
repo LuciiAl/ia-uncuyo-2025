@@ -201,27 +201,27 @@ Este análisis permite visualizar cómo progresa cada método en el espacio de b
 
 ### Algoritmo Genético (GA)
 
-![Trayectoria GA](./trayectoria_H_GA.png)
+![Trayectoria GA](./images/trayectoria_H_GA.png)
 
 
 ### Hill Climbing (HC)
 
-![Trayectoria HC](./trayectoria_H_HC.png)
+![Trayectoria HC](./images/trayectoria_H_HC.png)
 
 
 ### Hill Climbing con Reinicios (HCR)
 
-![Trayectoria HCR](./trayectoria_H_HCR.png)
+![Trayectoria HCR](./images/trayectoria_H_HCR.png)
 
 
 ### Random Search
 
-![Trayectoria Random](./trayectoria_H_Random.png)
+![Trayectoria Random](./images/trayectoria_H_Random.png)
 
 
 ### Simulated Annealing (SA)
 
-![Trayectoria SA](./trayectoria_H_SA.png)
+![Trayectoria SA](./images/trayectoria_H_SA.png)
 
 
 ### 3. Tiempos de ejecución
