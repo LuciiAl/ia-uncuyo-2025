@@ -27,6 +27,134 @@ Cada algoritmo fue ejecutado **30 veces** con diferentes semillas para los tama�
 
 Los resultados fueron procesados en formato CSV (`tp4-Nreinas.csv`) y visualizados mediante gráficos comparativos.
 
+## **Detalles de los algoritmos**
+
+### **Simulated Annealing – Función de enfriamiento (*schedule*)**
+
+Para **Simulated Annealing** se utilizó una función de enfriamiento exponencial dada por:
+
+$$
+T(t) = T_0, e^{-\alpha t}
+$$
+
+donde:
+
+* (T_0 = 1.0): temperatura inicial
+* (\alpha = 0.003): tasa de enfriamiento
+* (t): número de iteración
+
+Mientras la temperatura sea alta, el algoritmo acepta soluciones peores con mayor probabilidad.
+A medida que (T(t)) disminuye, el comportamiento se vuelve más **greedy**, aceptando cada vez menos empeoramientos.
+
+Además, se incluye un criterio de corte adicional:
+
+$$
+T(t) \le 10^{-6}
+$$
+
+Cuando esta condición se cumple, el algoritmo se detiene incluso si no se alcanzó (H = 0).
+
+
+## **Algoritmo Genético – Parámetros y operadores**
+
+Cada individuo se representa como:
+
+$$
+\mathbf{x} = (x_1, x_2, \ldots, x_N)
+$$
+
+donde (x_i) indica la fila de la reina en la columna (i).
+
+
+### **Tamaño de población**
+
+$$
+\text{Población} = 100
+$$
+
+
+### **Función de fitness**
+
+Basada en los conflictos (H(\mathbf{x})):
+
+$$
+\text{fitness}(\mathbf{x}) = \frac{1}{1 + H(\mathbf{x})}
+$$
+
+Máximo valor cuando (H = 0):
+
+$$
+\text{fitness} = 1
+$$
+
+
+### **Selección (tournament selection)**
+
+Tamaño del torneo:
+
+$$
+k = 3
+$$
+
+
+### **Cruzamiento (one-point crossover)**
+
+El punto de corte se elige uniformemente:
+
+$$
+c \sim \mathcal{U}(1, N-2)
+$$
+
+Los hijos se obtienen combinando los fragmentos de los padres respecto al punto (c).
+
+
+### **Mutación**
+
+Probabilidad:
+
+$$
+p_{\text{mut}} = 0.1
+$$
+
+Operador:
+
+$$
+x_i \leftarrow \text{rand}(0, N-1)
+$$
+
+para una columna seleccionada al azar.
+
+
+
+### **Elitismo**
+
+Se conservan:
+
+$$
+2 \text{ individuos con mayor fitness}
+$$
+
+sin alteración.
+
+
+
+### **Criterio de terminación**
+
+El algoritmo finaliza cuando:
+
+1. Se encuentra una solución óptima:
+
+   $$
+   H(\mathbf{x}) = 0
+   $$
+
+2. Se alcanza el máximo número de generaciones:
+
+   $$
+   g = \text{max_generaciones}
+   $$
+
+
 
 ## Resultados y análisis
 
@@ -57,6 +185,43 @@ En **N=8**, los métodos **Simulated Annealing** y **HCR** mantienen un desempe�
 En **N=10**, la brecha entre métodos se hace más notoria:  
 **SA** y **HCR** siguen encontrando soluciones óptimas, mientras que **GA** y **HC** muestran soluciones parciales con `H>0`.  
 El algoritmo aleatorio rara vez alcanza el estado óptimo, demostrando su ineficiencia en espacios de búsqueda más complejos.
+
+# Evolución de la función H a lo largo de una ejecución
+
+Además del análisis estadístico global basado en 30 ejecuciones por configuración, se incluye un estudio complementario donde se observa la **evolución de la función objetivo (H)** a lo largo de las iteraciones para **una única ejecución representativa de cada algoritmo**.
+
+Este análisis permite visualizar cómo progresa cada método en el espacio de búsqueda, mostrando sus patrones típicos de convergencia:
+
+* **Random:** comportamiento errático sin tendencia sistemática a la mejora.
+* **Hill Climbing (HC):** descenso rápido seguido de estancamiento en el primer óptimo local.
+* **Hill Climbing con Reinicios (HCR):** sucesivas caídas bruscas tras reinicios.
+* **Simulated Annealing (SA):** curva suave con pequeñas oscilaciones debido a la aceptación probabilística de empeoramientos.
+* **Algoritmo Genético (GA):** mejora escalonada reflejando el progreso generacional.
+
+
+### Algoritmo Genético (GA)
+
+![Trayectoria GA](./trayectoria_H_GA.png)
+
+
+### Hill Climbing (HC)
+
+![Trayectoria HC](./trayectoria_H_HC.png)
+
+
+### Hill Climbing con Reinicios (HCR)
+
+![Trayectoria HCR](./trayectoria_H_HCR.png)
+
+
+### Random Search
+
+![Trayectoria Random](./trayectoria_H_Random.png)
+
+
+### Simulated Annealing (SA)
+
+![Trayectoria SA](./trayectoria_H_SA.png)
 
 
 ### 3. Tiempos de ejecución
